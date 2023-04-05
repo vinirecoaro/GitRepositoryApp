@@ -1,10 +1,12 @@
 package br.com.igorbag.githubsearch.ui
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import br.com.igorbag.githubsearch.R
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         showUserName()
         setupRetrofit()
         getAllReposByUserName()
+        setupListeners()
     }
 
     // Metodo responsavel por realizar o setup da view e recuperar os Ids do layout
@@ -36,13 +39,21 @@ class MainActivity : AppCompatActivity() {
 
     //metodo responsavel por configurar os listeners click da tela
     private fun setupListeners() {
-        //@TODO 2 - colocar a acao de click do botao confirmar
+        btnConfirmar.setOnClickListener{
+            if(nomeUsuario.text.isEmpty()){
+                Toast.makeText(applicationContext, "Preencha o campo usuario !", Toast.LENGTH_SHORT).show()
+            }else{
+                saveUserLocal(nomeUsuario.text.toString())
+            }
+        }
     }
 
-
     // salvar o usuario preenchido no EditText utilizando uma SharedPreferences
-    private fun saveUserLocal() {
-        //@TODO 3 - Persistir o usuario preenchido na editText com a SharedPref no listener do botao salvar
+    private fun saveUserLocal(user: String) {
+        val sharedPref = getPreferences(Context.MODE_PRIVATE) ?: return
+        with(sharedPref.edit()){
+            putString(getString(R.string.nome_usuario), user)
+        }
     }
 
     private fun showUserName() {
