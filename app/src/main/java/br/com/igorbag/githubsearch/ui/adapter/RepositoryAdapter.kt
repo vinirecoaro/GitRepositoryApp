@@ -30,6 +30,10 @@ class RepositoryAdapter(private val mActivity: MainActivity, private val reposit
             val repository = repositories[position]
             mActivity.shareRepositoryLink(repository.htmlUrl)
         }
+        holder.reposName.setOnClickListener{
+            val repository = repositories[position]
+            mActivity.openBrowser(repository.htmlUrl)
+        }
     }
 
     override fun getItemCount(): Int = repositories.size

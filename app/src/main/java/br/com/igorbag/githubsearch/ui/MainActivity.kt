@@ -111,9 +111,6 @@ class MainActivity : AppCompatActivity() {
         repositoriesList.adapter = reposAdapter
     }
 
-
-    // Metodo responsavel por compartilhar o link do repositorio selecionado
-    // @Todo 11 - Colocar esse metodo no click do share item do adapter
     fun shareRepositoryLink(urlRepository: String) {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
