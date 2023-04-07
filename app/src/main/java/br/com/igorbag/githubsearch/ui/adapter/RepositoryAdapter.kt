@@ -9,12 +9,12 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import br.com.igorbag.githubsearch.R
 import br.com.igorbag.githubsearch.domain.Repository
+import br.com.igorbag.githubsearch.ui.MainActivity
 
-class RepositoryAdapter(private val repositories: List<Repository>) :
+class RepositoryAdapter(private val mActivity: MainActivity, private val repositories: List<Repository>) :
     RecyclerView.Adapter<RepositoryAdapter.ViewHolder>() {
 
     var carItemListener: (Repository) -> Unit = {}
-    var btnShareListener: (Repository) -> Unit = {}
 
     // Cria uma nova view
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,7 +27,8 @@ class RepositoryAdapter(private val repositories: List<Repository>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.reposName.text = repositories[position].name
         holder.share.setOnClickListener{
-            holder.reposName.text = "shared"
+            val repository = repositories[position]
+            mActivity.shareRepositoryLink(repository.htmlUrl)
         }
     }
 

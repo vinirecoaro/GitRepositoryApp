@@ -52,6 +52,8 @@ class MainActivity : AppCompatActivity() {
                 saveUserLocal(nomeUsuario.text.toString())
             }
         }
+
+
     }
 
     // salvar o usuario preenchido no EditText utilizando uma SharedPreferences
@@ -104,7 +106,7 @@ class MainActivity : AppCompatActivity() {
 
     // Metodo responsavel por realizar a configuracao do adapter
     fun setupAdapter(list: List<Repository>) {
-        val reposAdapter = RepositoryAdapter(list)
+        val reposAdapter = RepositoryAdapter(this, list)
         repositoriesList.layoutManager = LinearLayoutManager(applicationContext)
         repositoriesList.adapter = reposAdapter
     }
