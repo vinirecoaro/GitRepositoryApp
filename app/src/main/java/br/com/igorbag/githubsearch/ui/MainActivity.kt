@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
             putString(R.string.nome_usuario.toString(), user)
             apply()
         }
+        getAllReposByUserName()
     }
 
     private fun showUserName() {
